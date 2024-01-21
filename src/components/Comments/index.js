@@ -63,19 +63,23 @@ class Comments extends Component {
     event.preventDefault()
     const {inputName, inputComment, commentsList} = this.state
 
-    const newComment = {
-      id: uuid(),
-      name: inputName,
-      comment: inputComment,
-      timeStamp: new Date().toISOString(),
-      isLiked: false,
-      profileBgColor: this.getRandomItem(initialContainerBackgroundClassNames),
+    if (inputName && inputComment) {
+      const newComment = {
+        id: uuid(),
+        name: inputName,
+        comment: inputComment,
+        timeStamp: new Date().toISOString(),
+        isLiked: false,
+        profileBgColor: this.getRandomItem(
+          initialContainerBackgroundClassNames,
+        ),
+      }
+      this.setState({
+        inputName: '',
+        inputComment: '',
+        commentsList: [...commentsList, newComment],
+      })
     }
-    this.setState({
-      inputName: '',
-      inputComment: '',
-      commentsList: [...commentsList, newComment],
-    })
   }
 
   render() {
